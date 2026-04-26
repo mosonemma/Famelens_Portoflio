@@ -37,10 +37,10 @@ font-weight:600;
     align-items:center;
 }
 
-/* small logo image before text */
+/* Logo image - sized to match text height */
 .logo-img{
-    height:40px;
-    margin-right:10px;
+    height:45px;
+    width:auto;
 }
 .logo span{
 color:#00d9ff;
@@ -272,17 +272,19 @@ header.nav-open nav{
 /* subcategory slider (work section) */
 .subcat-slider{
     position:relative;
-    overflow:hidden;
-    padding:25px 0 40px;
+    overflow:visible;
+    padding:25px 40px 40px;
+    margin: 0 -40px;
 }
 
 .subcat-slides{
     display:flex;
-    width:100%;
     gap:16px;
     transition:transform 0.7s ease;
     will-change:transform;
     padding-bottom:10px;
+    /* Allow overflow for sliding */
+    width: max-content;
 }
 
 .subcat-slides .work-card{
@@ -304,19 +306,21 @@ header.nav-open nav{
     height:38px;
     border-radius:50%;
     border:none;
-    background:rgba(0,0,0,0.32);
-    color:#fff;
+    background:rgba(255,255,255,0.9);
+    color:#000;
     display:flex;
     align-items:center;
     justify-content:center;
     cursor:pointer;
     z-index:3;
     transition:background .2s, transform .2s;
+    visibility:visible !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .subcat-arrow:hover{
-    background:rgba(0,0,0,0.55);
-    transform:translateY(-50%) scale(1.05);
+    background:#fff;
+    transform:translateY(-50%) scale(1.1);
 }
 
 .subcat-arrow.prev{
@@ -343,8 +347,12 @@ header.nav-open nav{
     border-radius:50%;
     background:rgba(255,255,255,0.45);
     cursor:pointer;
-    transition:.25s;
+    transition:.25s;    display:inline-block;
 }
+
+.subcat-dot.active{
+    background:#00d9ff;
+    transform:scale(1.3);}
 
 .subcat-dot.active{
     background:#00d9ff;

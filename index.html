@@ -19,7 +19,7 @@
 <header>
 <div class="container nav">
 
-<h2 class="logo"><img src="fame/logo.jpeg" alt="FameLens logo" class="logo-img"> FAME<span>LENS</span></h2>
+<h2 class="logo"><img src="fame/shakim0.jpeg" alt="FameLens logo" class="logo-img"></h2>
 
 <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
     <span></span>
@@ -55,6 +55,7 @@
                     <img src="fame/BRING WORK.jpg" class="slide" alt="Showcase image 1">
                     <img src="fame/banner yane.jpg" class="slide" alt="Showcase image 2">
                     <img src="fame/good design.jpg" class="slide" alt="Showcase image 3">
+                    <img src="fame/shakim1.jpeg" class="slide" alt="Showcase image 4">    
                 </div>
 
                 <div class="slider-overlay"></div>
@@ -83,7 +84,7 @@
 <h2 class="section-title">Featured Work</h2>
 
 <!-- overview/pricing image -->
-<img src="fame/pricelist .jpg" alt="Pricing for design and multimedia services" class="pricing-overview">
+<img src="fame/shakimmain.jpeg" alt="Pricing for design and multimedia services" class="pricing-overview">
 
 <!-- category selectors -->
 <div class="categories">
@@ -118,7 +119,16 @@
                         <img src="Projects/logo 2.jpg">
                         <div class="overlay"><h3>Modern Logo</h3></div>
                     </div>
+                    <div class="work-card">
+                        <img src="Projects/New/logo.jpeg">
+                        <div class="overlay"><h3>Modern Logo</h3></div>
+                    </div>
+                    <div class="work-card">
+                        <img src="Projects/New/logo0.jpeg">
+                        <div class="overlay"><h3>Modern Logo</h3></div>
+                    </div>
                 </div>
+
                     
                 <button class="subcat-arrow prev" aria-label="Previous slide">
                     <i class="fas fa-chevron-left"></i>
@@ -141,6 +151,10 @@
             <h4 class="subcategory-title">Audio & Event Flyers</h4>
             <div class="subcat-slider">
                 <div class="subcat-slides">
+                    <div class="work-card">
+                        <img src="Projects/New/Event2.jpeg">
+                        <div class="overlay"><h3>Audio Out Flyer</h3></div>
+                    </div>
                     <div class="work-card">
                         <img src="Projects/SUPPORT~2.jpg">
                         <div class="overlay"><h3>Audio Out Flyer</h3></div>
@@ -174,7 +188,19 @@
                         <div class="overlay"><h3>Promo Flyer</h3></div>
                     </div>
                     <div class="work-card">
-                        <img src="images/party-flyer.jpg">
+                        <img src="Projects/New/Event.jpeg">
+                        <div class="overlay"><h3>Party Flyer</h3></div>
+                    </div>
+                    <div class="work-card">
+                        <img src="Projects/New/Event0.jpeg">
+                        <div class="overlay"><h3>Party Flyer</h3></div>
+                    </div>
+                    <div class="work-card">
+                        <img src="Projects/New/Event1.jpeg">
+                        <div class="overlay"><h3>Party Flyer</h3></div>
+                    </div>
+                    <div class="work-card">
+                        <img src="Projects/New/Event3.jpeg">
                         <div class="overlay"><h3>Party Flyer</h3></div>
                     </div>
                 </div>
@@ -193,6 +219,10 @@
             <h4 class="subcategory-title">Business & Special Flyers</h4>
             <div class="subcat-slider">
                 <div class="subcat-slides">
+                    <div class="work-card">
+                        <img src="Projects/New/Business.jpeg">
+                        <div class="overlay"><h3>Business Flyer</h3></div>
+                    </div>
                     <div class="work-card">
                         <img src="Projects/flyer_2.jpg">
                         <div class="overlay"><h3>Business Flyer</h3></div>
@@ -230,8 +260,12 @@
                         <div class="overlay"><h3>Sale Flyer</h3></div>
                     </div>
                     <div class="work-card">
-                        <img src="images/business-card-flyer.jpg">
+                        <img src="Projects/New/Business0.jpeg">
                         <div class="overlay"><h3>Business Card Flyer</h3></div>
+                    </div>
+                    <div class="work-card">
+                        <img src="Projects/New/Business1.jpeg">
+                        <div class="overlay"><h3>Business Flyer</h3></div>
                     </div>
                 </div>
 
@@ -388,6 +422,10 @@
                 </div>
                 <div class="work-card">
                     <img src="Projects/FreMockup3.jpg">
+                    <div class="overlay"><h3>3D Mock‑up</h3></div>
+                </div>
+                <div class="work-card">
+                    <img src="Projects/New/Others.jpeg">
                     <div class="overlay"><h3>3D Mock‑up</h3></div>
                 </div>
                 <div class="work-card">
@@ -702,124 +740,110 @@ Interested in working together? Let's create something amazing.
 })();
 
 (function(){
-    const sliders = document.querySelectorAll('.subcat-slider');
+    // Wait for DOM to be fully loaded and rendered
+    window.addEventListener('load', function() {
+        initSubcategorySliders();
+    });
+    
+    // Also try to init immediately in case load already fired
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(initSubcategorySliders, 100);
+    }
 
-    sliders.forEach((slider) => {
-        const slidesWrapper = slider.querySelector('.subcat-slides');
-        const slideElements = slidesWrapper ? slidesWrapper.querySelectorAll('.work-card') : [];
-        const prevButton = slider.querySelector('.subcat-arrow.prev');
-        const nextButton = slider.querySelector('.subcat-arrow.next');
-        const dotsContainer = slider.querySelector('.subcat-dots');
-        let current = 0;
+    function initSubcategorySliders() {
+        const sliders = document.querySelectorAll('.subcat-slider');
 
-        const clampIndex = (index) => {
-            const total = slideElements.length;
-            return total === 0 ? 0 : ((index % total) + total) % total;
+        // Get card width based on viewport
+        const getCardWidth = () => {
+            return window.innerWidth <= 768 ? 236 : 296;
         };
 
-        const update = (index) => {
-            current = clampIndex(index);
-            if (slidesWrapper && slideElements.length) {
-                const cardWidth = slideElements[0].getBoundingClientRect().width;
-                const gap = 16; // matches CSS gap
-                slidesWrapper.style.transform = `translateX(-${current * (cardWidth + gap)}px)`;
+        sliders.forEach((slider) => {
+            const slidesWrapper = slider.querySelector('.subcat-slides');
+            const slideElements = slidesWrapper ? slidesWrapper.querySelectorAll('.work-card') : [];
+            const prevButton = slider.querySelector('.subcat-arrow.prev');
+            const nextButton = slider.querySelector('.subcat-arrow.next');
+            const dotsContainer = slider.querySelector('.subcat-dots');
+            
+            if (slideElements.length === 0) return;
+            
+            let current = 0;
+
+            const clampIndex = (index) => {
+                const total = slideElements.length;
+                return ((index % total) + total) % total;
+            };
+
+            const update = (index) => {
+                current = clampIndex(index);
+                if (slidesWrapper) {
+                    const cardWidth = getCardWidth();
+                    slidesWrapper.style.transform = `translateX(-${current * cardWidth}px)`;
+                }
+                if (dotsContainer) {
+                    const dots = dotsContainer.querySelectorAll('.subcat-dot');
+                    dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+                }
+            };
+
+            const createDots = () => {
+                if (!dotsContainer) return;
+                dotsContainer.innerHTML = '';
+                slideElements.forEach((_, index) => {
+                    const dot = document.createElement('span');
+                    dot.className = 'subcat-dot';
+                    if (index === 0) dot.classList.add('active');
+                    dot.dataset.index = String(index);
+                    dot.addEventListener('click', () => update(index));
+                    dotsContainer.appendChild(dot);
+                });
+            };
+
+            const next = () => update(current + 1);
+            const prev = () => update(current - 1);
+
+            if (prevButton) prevButton.addEventListener('click', prev);
+            if (nextButton) nextButton.addEventListener('click', next);
+
+            // Touch/swipe support
+            let startX = 0;
+            let deltaX = 0;
+
+            const onTouchStart = (event) => {
+                startX = event.touches[0]?.clientX || 0;
+                deltaX = 0;
+            };
+
+            const onTouchMove = (event) => {
+                deltaX = (event.touches[0]?.clientX || 0) - startX;
+            };
+
+            const onTouchEnd = () => {
+                if (Math.abs(deltaX) > 50) {
+                    if (deltaX > 0) prev();
+                    else next();
+                }
+                startX = 0;
+                deltaX = 0;
+            };
+
+            slider.addEventListener('touchstart', onTouchStart, { passive: true });
+            slider.addEventListener('touchmove', onTouchMove, { passive: true });
+            slider.addEventListener('touchend', onTouchEnd);
+
+            // Handle single vs multiple slides
+            const hasMultiple = slideElements.length > 1;
+            if (!hasMultiple) {
+                if (prevButton) prevButton.style.display = 'none';
+                if (nextButton) nextButton.style.display = 'none';
+                if (dotsContainer) dotsContainer.style.display = 'none';
             }
-            if (dotsContainer) {
-                const dots = dotsContainer.querySelectorAll('.subcat-dot');
-                dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
-            }
-        };
 
-        const createDots = () => {
-            if (!dotsContainer) return;
-            dotsContainer.innerHTML = ''; // reset
-            slideElements.forEach((_, index) => {
-                const dot = document.createElement('span');
-                dot.className = 'subcat-dot';
-                if (index === 0) dot.classList.add('active');
-                dot.dataset.index = String(index);
-                dot.addEventListener('click', () => update(index));
-                dotsContainer.appendChild(dot);
-            });
-        };
-
-        const next = () => update(current + 1);
-        const prev = () => update(current - 1);
-
-        if (prevButton) prevButton.addEventListener('click', prev);
-        if (nextButton) nextButton.addEventListener('click', next);
-
-        // swipe support
-        let startX = 0;
-        let deltaX = 0;
-
-        const onTouchStart = (event) => {
-            startX = event.touches[0]?.clientX || 0;
-            deltaX = 0;
-        };
-
-        const onTouchMove = (event) => {
-            deltaX = (event.touches[0]?.clientX || 0) - startX;
-        };
-
-        const onTouchEnd = () => {
-            if (Math.abs(deltaX) > 50) {
-                if (deltaX > 0) prev();
-                else next();
-            }
-            startX = 0;
-            deltaX = 0;
-        };
-
-        const resizeHandler = () => {
-            // update transform after resize so card width stays correct
-            update(current);
-        };
-        window.addEventListener('resize', resizeHandler);
-
-        slider.addEventListener('destroy', () => {
-            window.removeEventListener('resize', resizeHandler);
-        });
-
-        slider.addEventListener('touchstart', onTouchStart, { passive: true });
-        slider.addEventListener('touchmove', onTouchMove, { passive: true });
-        slider.addEventListener('touchend', onTouchEnd);
-
-        const hasMultiple = slideElements.length > 1;
-        if (!hasMultiple) {
-            if (prevButton) prevButton.style.display = 'none';
-            if (nextButton) nextButton.style.display = 'none';
-            if (dotsContainer) dotsContainer.style.display = 'none';
-        }
-
-        if (slideElements.length > 0) {
+            // Create dots and init first slide
             if (hasMultiple) createDots();
-            update(0);
-        }
-
-        // Toggle hamburger
-const hamburger = document.getElementById("hamburger");
-const navbar = document.getElementById("navbar");
-
-hamburger.addEventListener("click", () => {
-  navbar.classList.toggle("active");
-});
-
-// Toggle groups
-document.querySelectorAll(".menu-group span").forEach(group => {
-  group.addEventListener("click", () => {
-    const dropdown = group.nextElementSibling;
-
-    // Close others (optional but cleaner)
-    document.querySelectorAll(".menu-group .dropdown").forEach(menu => {
-      if (menu !== dropdown) menu.style.display = "none";
-    });
-
-    dropdown.style.display =
-      dropdown.style.display === "block" ? "none" : "block";
-  });
-});
-    });
+            setTimeout(() => update(0), 50);
+        });
+    }
 })();
 
 </script>
