@@ -515,68 +515,25 @@ I combine creativity, technology, and storytelling to create engaging visual con
 
 
 
-<section class="contact section" id="contact">
+<section id="contact" class="contact">
+    <div class="container">
+        <h2>Get in Touch</h2>
+        <form action="contact.php" method="POST" class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
 
-<h2 class="section-title">Contact</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
 
-<p class="contact-text">
-Interested in working together? Let's create something amazing.
-</p>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
 
-<div class="contact-grid">
-    <div class="contact-info">
-        <div class="contact-card">
-            <h3>Get in touch</h3>
-            <p>Feel free to reach out via email, phone, or social media. I typically respond within 24 hours.</p>
+            <!-- Honeypot field for spam detection -->
+            <input type="text" name="website" style="display:none">
 
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <div>
-                    <strong>Email</strong>
-                    <a href="mailto:famelensvisuals@email.com">famelensvisuals@email.com</a>
-                </div>
-            </div>
-
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <div>
-                    <strong>Phone</strong>
-                    <a href="tel:+256789096592">+256 789 096 592</a>
-                    <a href="tel:+256707750442">+256 707 750 442</a>
-                </div>
-            </div>
-
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                    <strong>Location</strong>
-                    <span>Mbale City, Kampala Uganda</span>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="contact-card">
-            <h3>Send a message</h3>
-            <form class="contact-form" action="mailto:your@email.com" method="POST" enctype="text/plain">
-                <label>
-                    <span>Name</span>
-                    <input type="text" name="name" placeholder="Your name" required>
-                </label>
-                <label>
-                    <span>Email</span>
-                    <input type="email" name="email" placeholder="yourname@gmail.com" required>
-                </label>
-                <label>
-                    <span>Message</span>
-                    <textarea name="message" rows="5" placeholder="Tell me about your project" required></textarea>
-                </label>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
     </div>
-</div>
-
 </section>
 
 <section class="social-footer">
